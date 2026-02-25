@@ -1,30 +1,30 @@
 <?php
-    if (isset($_SESSION['auth'])) {
-    }
-    include 'header.php';
-    include 'db.php';
+if (isset($_SESSION['auth'])) {
+}
+include 'header.php';
+include 'db.php';
 
-    //RETRIEVE DATA
-    if (isset($_GET['userid'])) {
-        $userid = $_GET['userid'];
-        $sql = "SELECT * FROM user WHERE userid=$userid";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while ($row = $result->fetch_assoc()) {
+//RETRIEVE DATA
+if (isset($_GET['userid'])) {
+    $userid = $_GET['userid'];
+    $sql = "SELECT * FROM user WHERE userid=$userid";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
             $userid = $row['userid'];
             $name = $row['name'];
             $email = $row['email'];
             $contact = $row['contact'];
             $department = $row['department'];
             $datecreate = $row['datecreate'];
-            }
-        } else {
-            echo "<script>
+        }
+    } else {
+        echo "<script>
             windows.alert('Error: Update not successful')
           </script>";
-        }
     }
+}
 ?>
 
 <head>
@@ -103,86 +103,6 @@
             </div>
         </div>
     </div>
-
-    <!-- firebase -->
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        /*import {
-          getAnalytics
-        } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
-        import {
-          initializeApp
-        } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import {
-          getDatabase,
-          set,
-          ref,
-          update
-        } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-        import {
-          getAuth,
-          createUserWithEmailAndPassword,
-          signInWithEmailAndPassword
-        } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-          apiKey: "AIzaSyBWrcPpZ7Yrn2dVQLpovWAQwttxjsmzNx8",
-          authDomain: "pminventory-58e38.firebaseapp.com",
-          databaseURL: "https://pminventory-58e38-default-rtdb.firebaseio.com",
-          projectId: "pminventory-58e38",
-          storageBucket: "pminventory-58e38.appspot.com",
-          messagingSenderId: "117521079698",
-          appId: "1:117521079698:web:5f14df35b46fae194e754b",
-          measurementId: "G-2EJP605RQW"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-        const auth = getAuth();
-
-
-        signUp.addEventListener('click', (e) => {
-
-          var email = document.getElementById('email').value;
-          var password = document.getElementById('password').value;
-          var fullname = document.getElementById('fullname').value;
-          var contact = document.getElementById('contact').value;
-          var role = document.getElementById('role').value;
-          var datecreate = document.getElementById('datecreate').value;
-
-
-          createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-              // Signed in 
-              const user = userCredential.user;
-
-              set(ref(database, 'users/' + user.uid), {
-                fullname: fullname,
-                email: email,
-                contact: contact,
-                role: role,
-                datecreate: datecreate,
-              })
-
-              alert('Register Successful');
-
-              // ...
-            })
-            .catch((error) => {
-              const errorCode = error.code;
-              const errorMessage = error.message;
-
-              alert(errorMessage);
-              // ..
-            });
-
-        });
-    </script>
 
     <?php
     include 'footer.php';
