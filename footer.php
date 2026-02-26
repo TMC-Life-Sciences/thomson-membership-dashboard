@@ -494,50 +494,70 @@
 
 
 <script>
-  var timeoutInMilliseconds = 900000; // 15 minutes
+  var idleTimeoutMs = 600000; // 10 minutes total idle timeout
+  var warningBeforeMs = 60000; // show warning 60 seconds before logout
 
+  var idleTimer;
+  var warningTimer;
+  var countdownInterval;
+  var countdownSeconds = 60;
 
-
-  var timeoutId;
-
-
-
-  function startTimer() {
-    timeoutId = setTimeout(redirectLogout, timeoutInMilliseconds);
+  function startIdleTimer() {
+    // Warning timer fires at (10 min - 60 sec) = 9 minutes
+    warningTimer = setTimeout(showWarning, idleTimeoutMs - warningBeforeMs);
+    // Logout timer fires at 10 minutes
+    idleTimer = setTimeout(redirectLogout, idleTimeoutMs);
   }
 
-
-
-  function resetTimer() {
-    clearTimeout(timeoutId);
-    startTimer();
+  function resetIdleTimer() {
+    clearTimeout(idleTimer);
+    clearTimeout(warningTimer);
+    clearInterval(countdownInterval);
+    // Hide modal if it was showing
+    $('#idleModal').modal('hide');
+    countdownSeconds = 60;
+    document.getElementById('idleCountdown').textContent = countdownSeconds;
+    startIdleTimer();
   }
 
-
+  function showWarning() {
+    countdownSeconds = 60;
+    document.getElementById('idleCountdown').textContent = countdownSeconds;
+    $('#idleModal').modal('show');
+    countdownInterval = setInterval(function() {
+      countdownSeconds--;
+      document.getElementById('idleCountdown').textContent = countdownSeconds;
+      if (countdownSeconds <= 0) {
+        clearInterval(countdownInterval);
+      }
+    }, 1000);
+  }
 
   function redirectLogout() {
+    clearInterval(countdownInterval);
     window.location.href = 'logout.php?logout=1';
-    // $(document).ready(function() {
-    //   $("#idleModal").modal("show");
-    // });
   }
 
+  // "Stay Logged In" button resets the timer
+  $(document).on('click', '#stayLoggedIn', function() {
+    resetIdleTimer();
+  });
 
-
-  // Reset the timer on user activity events (e.g., mousemove, keydown)
-  window.addEventListener('mousemove', resetTimer);
-  window.addEventListener('keydown', resetTimer);
-
-
+  // Reset the timer on user activity events
+  window.addEventListener('mousemove', resetIdleTimer);
+  window.addEventListener('keydown', resetIdleTimer);
+  window.addEventListener('click', resetIdleTimer);
+  window.addEventListener('scroll', resetIdleTimer);
 
   // Start the timer when the page loads
-  window.onload = startTimer;
+  $(document).ready(function() {
+    startIdleTimer();
+  });
 </script>
 
 
 
 <!-- End custom js for this page-->
-
 
 
 
