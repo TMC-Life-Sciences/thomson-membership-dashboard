@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="css/vertical-layout-light/style.css">
     <link rel="shortcut icon" href="images/thkd/thkd-butterfly.png" />
-    <!-- <script src="https://kit.fontawesome.com/9dbb640724.js" crossorigin="anonymous"></script> -->
-    <script src="https://kit.fontawesome.com/9e7d2c1449.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/9dbb640724.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/9e7d2c1449.js" crossorigin="anonymous"></script> -->
 
     <!-- Internal Styles -->
     <style>

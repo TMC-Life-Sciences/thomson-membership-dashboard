@@ -133,7 +133,9 @@
 
   // Add event listener to the date of birth input field
 
-  dobInput.addEventListener('change', calculateAge);
+  if (dobInput) {
+    dobInput.addEventListener('change', calculateAge);
+  }
 
 
 

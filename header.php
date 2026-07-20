@@ -109,8 +109,8 @@ if (isset($_SESSION['userid']) && isset($_SESSION['name']) && isset($_SESSION['r
     <link rel="shortcut icon" href="images/thkd/thkd-butterfly.png" />
 
     <!-- font awesome -->
-    <!-- <script src="https://kit.fontawesome.com/9dbb640724.js" crossorigin="anonymous"></script> -->
-    <script src="https://kit.fontawesome.com/9e7d2c1449.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/9dbb640724.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/9e7d2c1449.js" crossorigin="anonymous"></script> -->
 
 
 
