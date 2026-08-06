@@ -50,7 +50,7 @@ if (isset($_SESSION['userid']) && isset($_SESSION['name']) && isset($_SESSION['r
 
 
 
-    if ($idle > (2 * 60)) {
+    if ($idle > (10 * 60)) {
 
       header('Location: logout.php');
 
@@ -541,30 +541,36 @@ if (isset($_SESSION['userid']) && isset($_SESSION['name']) && isset($_SESSION['r
 
         <!--Idle Alert-->
 
-        <div class="modal fade" id="idleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-          aria-hidden="true">
+        <div class="modal fade" id="idleModal" tabindex="-1" role="dialog" aria-labelledby="idleModalLabel"
+          data-backdrop="static" data-keyboard="false">
 
           <div class="modal-dialog" role="document">
 
             <div class="modal-content">
 
-              <div class="modal-header">
+              <div class="modal-header bg-warning">
 
-                <h5 class="modal-title" id="exampleModalLabel">Session Expiring</h5>
-
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-
-                  <span aria-hidden="true">×</span>
-
-                </button>
+                <h5 class="modal-title" id="idleModalLabel"><i class="fas fa-exclamation-triangle mr-2"></i>Session Expiring Soon</h5>
 
               </div>
 
-              <div class="modal-body">Your session is about to expire. Kindly re-login </div>
+              <div class="modal-body text-center">
 
-              <div class="modal-footer text-center">
+                <p>You have been idle. Your session will expire in:</p>
 
-                <a class="btn btn-block btn-danger" href="logout.php"><span>Close</span></a>
+                <h2 id="idleCountdown" style="font-size:3rem;font-weight:700;color:#dc3545;">60</h2>
+
+                <p>seconds</p>
+
+                <p class="text-muted small">Click "Stay Logged In" to continue your session.</p>
+
+              </div>
+
+              <div class="modal-footer justify-content-center">
+
+                <button class="btn btn-blue" id="stayLoggedIn"><span>Stay Logged In</span></button>
+
+                <a class="btn btn-danger" href="logout.php"><span>Logout Now</span></a>
 
               </div>
 
@@ -573,10 +579,6 @@ if (isset($_SESSION['userid']) && isset($_SESSION['name']) && isset($_SESSION['r
           </div>
 
         </div>
-
-
-
-
 
       <?php
 
